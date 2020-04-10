@@ -11,11 +11,10 @@ export class LocalStrategy extends PassportStrategy(Strategy) {
 
   async validate(username: string, password: string): Promise<any> {
     const user = await this.authSrv.validateUser(username, password);
+    // Logger.error(JSON.stringify(user), LocalStrategy.name);
     if (!user) {
-      Logger.error(`I return - exception`, LocalStrategy.name);
       throw new UnauthorizedException();
     }
-    Logger.error(`I return ${JSON.stringify(user)}`, LocalStrategy.name);
     return user;
   }
 }
